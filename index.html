@@ -23,23 +23,30 @@
         }
     </style>
 </head>
-<body onclick="playMusic()">
+<body>
     <div class="container">
         <h1>Нажми</h1>
     </div>
     
     <audio id="bg-music" loop>
-        
         <source src="assets/audio/girl-moans.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает аудио элемент.
     </audio>
 
     <script>
-        function playMusic() {
+        document.addEventListener("DOMContentLoaded", () => {
             const audio = document.getElementById("bg-music");
-            audio.play().catch(error => console.log("Ошибка воспроизведения:", error));
-            document.body.onclick = null; 
-        }
+
+            // Попытка автоигры
+            audio.play().catch(() => {
+                console.log("Браузер заблокировал автоигру. Ожидание клика...");
+            });
+
+            // Разблокировка нажатиями
+            document.body.addEventListener("click", () => {
+                audio.play().catch(error => console.log("Ошибка:", error));
+            }, { once: true }); // Один раз, чтобы не запускать повторно
+        });
     </script>
 </body>
 </html>
