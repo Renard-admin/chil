@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автоиграющая мелодия</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1e1e2e;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            cursor: pointer;
+        }
+        .container {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body onclick="playMusic()">
+    <div class="container">
+        <h1>Нажми</h1>
+    </div>
+    
+    <audio id="bg-music" loop>
+        
+        <source src="./audio\girl-moans.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио элемент.
+    </audio>
+
+    <script>
+        function playMusic() {
+            const audio = document.getElementById("bg-music");
+            audio.play().catch(error => console.log("Ошибка воспроизведения:", error));
+            document.body.onclick = null; 
+        }
+    </script>
+</body>
+</html>
